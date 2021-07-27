@@ -26,34 +26,34 @@ namespace CarPark.User.Controllers
 
         public IActionResult Index()
         {
-             
 
-            
 
-            //var settings = MongoClientSettings.FromConnectionString("mongodb+srv://byildiz:06112017Gss@carparkcluster.ucsbn.mongodb.net/CarParkDb?retryWrites=true&w=majority");
-            //var client = new MongoClient(settings);
-            //var database = client.GetDatabase("CarParkDb");
-            //var collection = database.GetCollection<Test>("Test");
-            //var test = new Test()
-            //{
-            //    _id = ObjectId.GenerateNewId(),
-            //    NameSurname = "Burak Yıldız",
-            //    Age = 26,
-            //    AddressList = new List<Address>()
-            //    {
-            //        new Address()
-            //        {
-            //            Description = "Başıbüyül",
-            //            Title = "Maltepe"
-            //        },
-            //        new Address()
-            //        {
-            //            Description = "Çekmeköy",
-            //            Title = "İst/Çekmeköy"
-            //        }
-            //    }
-            //};
-            //collection.InsertOne(test);
+
+
+            var settings = MongoClientSettings.FromConnectionString("mongodb+srv://byildiz:06112017Gss@carparkcluster.ucsbn.mongodb.net/CarParkDb?retryWrites=true&w=majority");
+            var client = new MongoClient(settings);
+            var database = client.GetDatabase("CarParkDb");
+            var collection = database.GetCollection<Test>("Test");
+            var test = new Test()
+            {
+                _id = ObjectId.GenerateNewId(),
+                NameSurname = "Burak Yıldız",
+                Age = 26,
+                AddressList = new List<Address>()
+                {
+                    new Address()
+                    {
+                        Description = "Başıbüyül",
+                        Title = "Maltepe"
+                    },
+                    new Address()
+                    {
+                        Description = "Çekmeköy",
+                        Title = "İst/Çekmeköy"
+                    }
+                }
+            };
+            collection.InsertOne(test);
             var customer = new Customer()
             {
                 NameSurname = "Burak Yıldız",
