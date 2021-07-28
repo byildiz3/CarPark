@@ -4,8 +4,12 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using CarPark.Core.Repository.Abstract;
+using CarPark.Core.Settings;
+using CarPark.DataAccess.Repository;
 using CarPark.User.Resources;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
@@ -43,9 +47,13 @@ namespace CarPark.User
                         return factory.Create(nameof(SharedModelResource), assemblyName.Name);
                     }
                     );
-                
 
-
+            services.Configure<MongoSettings>(options =>
+            {
+                options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
+                options.Database = Configuration.GetSection("MongoConnection:Database").Value;
+            });
+            services.AddScoped(typeof(IRepository<>), typeof(MongoRepositoryBase<>));
             services.Configure<RequestLocalizationOptions>(opt =>
             {
                 var supportedCulture = new List<CultureInfo>()
