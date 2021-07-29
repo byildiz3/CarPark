@@ -27,7 +27,7 @@ namespace CarPark.DataAccess.Repository
         /// Get All
         /// </summary>
         /// <returns></returns>
-        public GetManyResult<TEntity> AsQuarable()
+        public GetManyResult<TEntity> GetAll()
         {
             var result = new GetManyResult<TEntity>();
             try
@@ -54,7 +54,7 @@ namespace CarPark.DataAccess.Repository
         /// Get All Async
         /// </summary>
         /// <returns></returns>
-        public async Task<GetManyResult<TEntity>> AsQurableAsync()
+        public async Task<GetManyResult<TEntity>> GetAllAsync()
         {
             var result = new GetManyResult<TEntity>();
             try

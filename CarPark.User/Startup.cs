@@ -4,8 +4,12 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using CarPark.Business.Abstract;
+using CarPark.Business.Concrete;
 using CarPark.Core.Repository.Abstract;
 using CarPark.Core.Settings;
+using CarPark.DataAccess.Abstract;
+using CarPark.DataAccess.Concrete;
 using CarPark.DataAccess.Repository;
 using CarPark.User.Resources;
 using Microsoft.AspNetCore.Builder;
@@ -53,7 +57,17 @@ namespace CarPark.User
                 options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
                 options.Database = Configuration.GetSection("MongoConnection:Database").Value;
             });
+
+            ///DI Start
             services.AddScoped(typeof(IRepository<>), typeof(MongoRepositoryBase<>));
+            services.AddScoped<IPersonelDataAccess, PersonelDataAccess>();
+            services.AddScoped<IPersonelService, PersonelService>();
+
+
+            ///////
+
+
+
             services.Configure<RequestLocalizationOptions>(opt =>
             {
                 var supportedCulture = new List<CultureInfo>()
@@ -67,12 +81,12 @@ namespace CarPark.User
                 opt.SupportedCultures = supportedCulture;
                 opt.SupportedUICultures = supportedCulture;
 
-                //opt.RequestCultureProviders = new List<IRequestCultureProvider>
-                //{
-                //    new QueryStringRequestCultureProvider(),
-                //    new CookieRequestCultureProvider(),
-                //    new AcceptLanguageHeaderRequestCultureProvider()
-                //};
+                opt.RequestCultureProviders = new List<IRequestCultureProvider>
+                {
+                    new QueryStringRequestCultureProvider(),
+                    new CookieRequestCultureProvider(),
+                    new AcceptLanguageHeaderRequestCultureProvider()
+                };
                 opt.RequestCultureProviders = new[]
                 {
                     new RouteDataRequestCultureProvider()

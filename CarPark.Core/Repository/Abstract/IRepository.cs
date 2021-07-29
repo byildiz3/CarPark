@@ -13,8 +13,8 @@ namespace CarPark.Core.Repository.Abstract
         /// Get All Start
         /// </summary>
         /// <returns></returns>
-        GetManyResult<TEntity> AsQuarable();
-        Task<GetManyResult<TEntity>> AsQurableAsync();
+        GetManyResult<TEntity> GetAll();
+        Task<GetManyResult<TEntity>> GetAllAsync();
         /// <summary>
         /// Filter List Start
         /// </summary>
